@@ -4,11 +4,31 @@ import TechItem from './TechItem'
 export default class TechList extends Component{
   state = {
     newTech:'',
-    techs:[
-      'Node.js',
-      'React.js',
-      'Mongodb'
-    ]
+    techs:[]
+  }
+
+  // assim que o componente aparece em tela
+  componentDidMount(){
+    const techs = localStorage.getItem('techs')
+    if(techs){
+      this.state({techs: JSON.parse(techs)})
+    }
+  }
+
+  // assim as props ou state for atualizado
+  componentDidUpdate(prevProps,prevState){
+    //prevProps propriedades antigas
+    //prevState estado antigo
+
+    //this.props
+    //this.state
+    if(prevState.techs !== this.state.techs){
+      localStorage.setItem('techs', JSON.stringify(this.state.techs))
+    }
+  }
+  
+  // quando o componente deixa de existir
+  componentWillMount(){
   }
 
   handleInputChange = (event)=>{
@@ -35,7 +55,7 @@ export default class TechList extends Component{
           <ul>
             {this.state.techs.map(item => (
               <TechItem 
-                key={item} 
+                key={item}
                 tech={item} 
                 onDelete={()=>this.handleDelete(item)}
               />
