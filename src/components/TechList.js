@@ -1,5 +1,6 @@
-import React , { Component, Fragment } from 'react'
+import React , { Component } from 'react'
 import TechItem from './TechItem'
+import { Container, Row, Col, Button, Input, Form, Label, FormGroup, Table} from 'reactstrap';
 
 class TechList extends Component{
   state = {
@@ -53,23 +54,41 @@ class TechList extends Component{
 
   render(){
     return(
-      <Fragment>
-        <form onSubmit={this.handleSubmit}>
-          <ul>
-            {this.state.techs.map(item => (
-              <TechItem 
-                key={item}
-                tech={item} 
-                onDelete={()=>this.handleDelete(item)}
-              />
-            ))}
-          </ul>
-          <input type="text" 
-            onChange={this.handleInputChange} 
-            value={this.state.newTech}/>
-          <button type="submit">Enviar</button>
-        </form>
-      </Fragment>
+      <Container>
+        <Form form onSubmit={this.handleSubmit} className="mt-4 mb-4">
+          <Row>
+            <FormGroup>
+              <Label for="exampleEmail" className="mr-sm-2">Novo item</Label>
+              <Input type="text" 
+                onChange={this.handleInputChange} 
+                value={this.state.newTech}/>
+            </FormGroup>
+          </Row>
+          <Row>
+            <Button color="primary" type="submit">Adicionar</Button>
+          </Row>
+        </Form>
+    
+        <Row>
+          <Table>
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Ação</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.techs.map(item => (
+                <TechItem 
+                  key={item}
+                  tech={item} 
+                  onDelete={()=>this.handleDelete(item)}
+                />
+              ))}
+            </tbody>
+          </Table>
+        </Row>
+      </Container>
     )
   }
 }

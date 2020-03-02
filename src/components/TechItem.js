@@ -1,12 +1,14 @@
 import React from 'react'
 import Proptypes from 'prop-types'
 
-function TechItem({ tech,onDelete }){
+import { Button } from 'reactstrap';
+
+function TechItem({ tech, onDelete }){
   return (
-    <li key={tech}>
-      {tech}
-      <button onClick={onDelete}>Remover</button>
-    </li>
+    <tr key={tech}>
+      <td>{tech}</td>
+      <td><Button color="danger" outline onClick={onDelete}>Remover</Button></td>
+    </tr>
   )
 }
 
