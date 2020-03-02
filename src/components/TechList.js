@@ -1,17 +1,17 @@
-import React , {Component, Fragment} from 'react'
+import React , { Component, Fragment } from 'react'
 import TechItem from './TechItem'
 
-export default class TechList extends Component{
+class TechList extends Component{
   state = {
-    newTech:'',
-    techs:[]
+    newTech: '',
+    techs: [],
   }
 
   // assim que o componente aparece em tela
   componentDidMount(){
     const techs = localStorage.getItem('techs')
     if(techs){
-      this.state({techs: JSON.parse(techs)})
+      this.setState({techs: JSON.parse(techs)});
     }
   }
 
@@ -22,7 +22,7 @@ export default class TechList extends Component{
 
     //this.props
     //this.state
-    if(prevState.techs !== this.state.techs){
+    if (prevState.techs !== this.state.techs) {
       localStorage.setItem('techs', JSON.stringify(this.state.techs))
     }
   }
@@ -33,19 +33,22 @@ export default class TechList extends Component{
 
   handleInputChange = (event)=>{
     // o estado do react é imutavel, assim adicionamos um novo
-    this.setState({newTech:event.target.value})
+    this.setState({ newTech: event.target.value })
   }
 
   handleSubmit = (event)=>{
     event.preventDefault()
+
     this.setState({
-      techs:[...this.state.techs,this.state.newTech],
-      newTech:''
-    })
+      techs: [...this.state.techs, this.state.newTech],
+      newTech: '',
+    });
   }
 
   handleDelete = (tech)=>{
-    this.setState({techs:this.state.techs.filter(t=> t !== tech)})
+    this.setState({
+      techs: this.state.techs.filter(t => t !== tech)
+    })
   }
 
   render(){
@@ -70,3 +73,5 @@ export default class TechList extends Component{
     )
   }
 }
+
+export default TechList;

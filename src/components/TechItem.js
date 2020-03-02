@@ -1,7 +1,7 @@
 import React from 'react'
 import Proptypes from 'prop-types'
 
-function TechItem({tech,onDelete}){
+function TechItem({ tech,onDelete }){
   return (
     <li key={tech}>
       {tech}
